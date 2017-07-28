@@ -21,7 +21,7 @@ var config = {
     rules: [
       {
         test: /\.js$/, // Check for all js files
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /palha/],
         use: [{
           loader: 'babel-loader',
           options: { presets: ['es2015'] }

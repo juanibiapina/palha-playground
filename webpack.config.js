@@ -18,16 +18,11 @@ var config = {
   },
 
   module: {
-    rules: [
-      {
-        test: /\.js$/, // Check for all js files
-        exclude: [/node_modules/, /palha/],
-        use: [{
-          loader: 'babel-loader',
-          options: { presets: ['es2015'] }
-        }]
-      }
-    ]
+    loaders: [{
+      test: /\.jsx?$/, // A regexp to test the require path. accepts either js or jsx
+      loader: 'babel-loader', // The module to load. "babel" is short for "babel-loader"
+      exclude: /node_modules/
+    }]
   },
 
   devtool: "eval-source-map" // Default development sourcemap

@@ -26,7 +26,12 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: X';
+    let status;
+    if (this.props.model.winner) {
+      status = `Winner: ${this.props.model.winner}`;
+    } else {
+      status = `Next player: ${this.props.model.xIsNext ? "X" : "O"}`;
+    }
 
     return (
       <div>
@@ -78,18 +83,51 @@ const view = (model, dispatch) => (
 
 const initialModel = {
   squares: Array(9).fill(null),
+  xIsNext: true,
+  winner: null,
 };
+
+const calculateWinner = (squares) => {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
 
 const update = (model, action) => {
   console.log(model);
   console.log(action);
+
   if (action.name === "CHECK_SQUARE") {
+    if (model.winner) {
+      return model;
+    }
+
+    if (model.squares[action.id]) {
+      return model;
+    }
+
     const squares = model.squares.slice();
-    squares[action.id] = "X";
+    squares[action.id] = model.xIsNext ? "X" : "O";
 
     return {
       ...model,
       squares: squares,
+      xIsNext: !model.xIsNext,
+      winner: calculateWinner(squares),
     };
   } else {
     return model;

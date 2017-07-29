@@ -1,16 +1,9 @@
-import Palha from 'palha';
 import React from 'react'
+import ReactDOM from 'react-dom';
 
-class X extends React.Component {
-  render() {
-    return null;
-  }
-}
+import Palha from 'palha';
 
-const Y = <X />;
-
-const f = () => {
-  console.log("hello world");
-};
-
-f();
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('root')
+);

@@ -26,16 +26,8 @@ class Board extends React.Component {
   }
 
   render() {
-    let status;
-    if (this.props.model.winner) {
-      status = `Winner: ${this.props.model.winner}`;
-    } else {
-      status = `Next player: ${this.props.model.xIsNext ? "X" : "O"}`;
-    }
-
     return (
       <div>
-        <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -56,17 +48,25 @@ class Board extends React.Component {
   }
 }
 
-const Game = (props) => (
-  <div className="game">
-    <div className="game-board">
-      <Board model={props.model} dispatch={props.dispatch}/>
+const Game = (props) => {
+    let status;
+    if (props.model.winner) {
+      status = `Winner: ${props.model.winner}`;
+    } else {
+      status = `Next player: ${props.model.xIsNext ? "X" : "O"}`;
+    }
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board model={props.model} dispatch={props.dispatch}/>
+      </div>
+      <div className="game-info">
+        <div className="status">{status}</div>
+      </div>
     </div>
-    <div className="game-info">
-      <div>{/* status */}</div>
-      <ol>{/* TODO */}</ol>
-    </div>
-  </div>
-);
+  );
+};
 
 // app
 

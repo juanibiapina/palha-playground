@@ -97,21 +97,21 @@ const calculateWinner = (squares) => {
   return null;
 }
 
-export const update = (model, action) => {
+export const update = (model, message) => {
   console.log(model);
-  console.log(action);
+  console.log(message);
 
-  if (action.name === "CHECK_SQUARE") {
+  if (message.name === "CHECK_SQUARE") {
     if (model.winner) {
       return model;
     }
 
-    if (model.squares[action.id]) {
+    if (model.squares[message.id]) {
       return model;
     }
 
     const squares = model.squares.slice();
-    squares[action.id] = model.xIsNext ? "X" : "O";
+    squares[message.id] = model.xIsNext ? "X" : "O";
 
     return {
       ...model,

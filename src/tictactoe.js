@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
 
 // components
 
@@ -67,13 +66,6 @@ const Game = (props) => {
 };
 
 // app
-
-export const reactRenderer = (view) => {
-  ReactDOM.render(
-    view,
-    document.getElementById('root')
-  );
-};
 
 export const view = (model, dispatch) => (
   <Game model={model} dispatch={dispatch} />

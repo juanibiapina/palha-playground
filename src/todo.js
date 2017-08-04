@@ -18,6 +18,12 @@ class TodoApp extends React.Component {
     this.props.dispatch({type: "ADD_TODO"})
   }
 
+  todos() {
+    return this.props.model.todos.map((todo) => (
+      <li>{todo}</li>
+    ));
+  }
+
   render() {
     return (
       <div>
@@ -26,6 +32,9 @@ class TodoApp extends React.Component {
           onChange={(event) => this.handleNewTodoChange(event)}
           onKeyDown={(event) => this.handleNewTodoKeyDown(event)}
         />
+        <ol>
+          {this.todos()}
+        </ol>
       </div>
     );
   }

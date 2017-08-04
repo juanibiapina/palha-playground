@@ -1,9 +1,7 @@
 import { start } from './framework';
 import { createReactRenderer } from './palhaReactRenderer';
 
-import { initialModel, update, view } from './tictactoe';
-
-import Palha from 'palha';
+import { initialModel, update, view } from './todo';
 
 start({
   initialModel: initialModel,

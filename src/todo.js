@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Http } from './framework';
+
 const ENTER_KEY = 13;
 
 // components
@@ -16,6 +18,10 @@ class TodoApp extends React.Component {
     event.preventDefault();
 
     this.props.dispatch({type: "ADD_TODO"})
+  }
+
+  postTodos() {
+    this.props.dispatch({type: "SAVE_TODOS"});
   }
 
   todos() {
@@ -35,6 +41,7 @@ class TodoApp extends React.Component {
         <ol>
           {this.todos()}
         </ol>
+        <button onClick={() => this.postTodos()}>POST</button>
       </div>
     );
   }
@@ -51,16 +58,15 @@ export const initialModel = {
   newTodo: "",
 };
 
-export const update = (model, message) => {
-  console.log(model);
-  console.log(message);
-
+export const update = (model, message, run) => {
   if (message.type === "UPDATE_NEW_TODO") {
     return {
       ...model,
       newTodo: message.text,
     };
-  } if (message.type === "ADD_TODO") {
+  }
+
+  if (message.type === "ADD_TODO") {
     let todos = model.todos;
     todos.push(model.newTodo);
 
@@ -69,7 +75,15 @@ export const update = (model, message) => {
       todos: todos,
       newTodo: "",
     };
-  } else {
-    return model;
   }
+
+  if (message.type === "SAVE_TODOS") {
+    run(Http.send(() => ({ type: "TODOS_SAVED" }), Http.request({
+      method: "PUT",
+      url: "http://localhost:3000/todos",
+      body: model.todos,
+    })));
+  }
+
+  return model;
 };

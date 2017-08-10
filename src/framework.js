@@ -13,9 +13,13 @@ export const start = (data) => {
       perform(nextCommand)
         .then((result) => {
           currentModel = data.update(currentModel, result, runCommand);
+          // next command again, oops
+          data.renderer(data.view(currentModel, dispatch));
         })
         .catch((result) => {
           currentModel = data.update(currentModel, result, runCommand);
+          // next command again, oops
+          data.renderer(data.view(currentModel, dispatch));
         });
 
       nextCommand = null;

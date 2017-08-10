@@ -85,5 +85,15 @@ export const update = (model, message, run) => {
     })));
   }
 
+  if (message.type === "TODOS_SAVED") {
+    const todos = model.todos;
+    todos.push("saved");
+
+    return {
+      ...model,
+      todos,
+    };
+  }
+
   return model;
 };

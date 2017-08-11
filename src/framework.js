@@ -1,4 +1,6 @@
-export const start = (data) => {
+export const createApp = () => start;
+
+const start = (data) => {
   let currentModel = data.initialModel;
   let nextCommand = null;
 

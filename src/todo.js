@@ -67,7 +67,7 @@ export const update = (model, message, run) => {
   }
 
   if (message.type === "ADD_TODO") {
-    let todos = model.todos;
+    let todos = model.todos.slice();
     todos.push(model.newTodo);
 
     return {
@@ -86,7 +86,7 @@ export const update = (model, message, run) => {
   }
 
   if (message.type === "TODOS_SAVED") {
-    const todos = model.todos;
+    const todos = model.todos.slice();
     todos.push("saved");
 
     return {

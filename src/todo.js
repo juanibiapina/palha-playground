@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Http } from './framework';
+import { Http } from 'palha';
 
 const ENTER_KEY = 13;
 
